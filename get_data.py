@@ -36,8 +36,9 @@ for suffix in url_suffix :
 	
 	url = base_url + suffix
 	data = pandas.read_csv(url, names=field_names)
-	big_data = big_data.append(data)
-	
+	big_data = big_data.append(data,ignore_index=False)
+
+big_data.reset_index(inplace=True)	
 # save data in hdf5 format
 key_data.to_hdf('mta_data.h5','key_data')	
 big_data.to_hdf('mta_data.h5','turnstile_data')	
